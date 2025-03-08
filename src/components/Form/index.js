@@ -4,24 +4,27 @@ import DropdownList from '../DropdownList';
 import Button from '../Button'
 import { useState } from 'react';
 
- const Form = () => {
-
-    const times = [
-        'frontend',
-        'backend',
-        'design',
-        'mobile',
-        'gestão'
-    ]
+ const Form = (props) => {
 
     const [name, setName] = useState('')
     const [role, setRole] = useState('');
     const [image, setImage] = useState('');
+    const [team, setTeam] = useState('');
 
 
     const saveCard = (event) => {
         event.preventDefault() //previne o comportamento padrão do submit
         console.log('card salvo => ', name, role)
+        props.cards({
+            name: name,
+            role: role,
+            image: image,
+            team: team
+        })
+        setName('')
+        setRole('')
+        setImage('')
+        setTeam('')
     }
 
     return (
@@ -49,7 +52,12 @@ import { useState } from 'react';
                     onAltered={value => setImage(value)}
                 />
                 
-                <DropdownList required={true} label="lista" items={times}/>
+                <DropdownList
+                    required={true}
+                    label="lista" 
+                    items={props.teams}
+                    onAltered={value => setTeam(value)}
+                />
 
                 <Button onclick={saveCard}>Criar card</Button>
             </form>
