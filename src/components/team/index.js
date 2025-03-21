@@ -7,7 +7,7 @@ const Team = (props) => {
         (props.colabborators.length > 0) ? <section className='team' style={{backgroundColor: props.secondaryColor}}>
             <h3 style={{borderBottomColor: props.primaryColor}}>{props.name}</h3>
             <div className='Collaborators'>
-                {props.colabborators.map(collaborator => <Collaborator name={collaborator.name} role={collaborator.role} image={collaborator.image}/>)} 
+                {props.colabborators.map(collaborator => <Collaborator key={collaborator.name} backgroundColor={props.primaryColor} name={collaborator.name} role={collaborator.role} image={collaborator.image}/>)} 
             </div>
         </section>
         : '' //pode colocar um elemento caso a condição seja false (ternario)

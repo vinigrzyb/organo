@@ -1,9 +1,9 @@
 import './Collaborator.css'
 
-const Collaborator = ({name, image, role}) => { //variáveis sem props
+const Collaborator = ({name, image, role, backgroundColor}) => { //variáveis sem props
     return(
         <div className='collaborator'>
-        <div className='header'>
+        <div className='header' style={{backgroundColor: backgroundColor}}>
                 <img src={image} alt={name}/>
             </div>
             <div className='footer'>
