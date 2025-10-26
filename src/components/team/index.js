@@ -1,17 +1,42 @@
+// components/Team/team.js - ATUALIZADO
+import './Team.css';
 import Collaborator from '../Collaborator';
-import './team.css'
 
-const Team = (props) => {
-    return(
-        //só renderiza o time se o array de colaboradores não for vazio (renderização condicional)
-        (props.colabborators.length > 0) ? <section className='team' style={{backgroundColor: props.secondaryColor}}>
-            <h3 style={{borderBottomColor: props.primaryColor}}>{props.name}</h3>
-            <div className='Collaborators'>
-                {props.colabborators.map(collaborator => <Collaborator key={collaborator.name} backgroundColor={props.primaryColor} name={collaborator.name} role={collaborator.role} image={collaborator.image}/>)} 
-            </div>
-        </section>
-        : '' //pode colocar um elemento caso a condição seja false (ternario)
-    )
-}
+const Team = ({ team, collaborators, onDelete, onToggleFavorite }) => {
+  return (
+    <section className="team-section">
+      <div className="team-header" style={{ borderLeftColor: team.primaryColor }}>
+        <div className="team-info">
+          <h3 className="team-name">{team.name}</h3>
+          <p className="team-description">{team.description}</p>
+        </div>
+        <div className="team-stats">
+          <span className="collaborator-count">{collaborators.length}</span>
+          <span>colaborador{collaborators.length !== 1 ? 'es' : ''}</span>
+        </div>
+      </div>
+      
+      {collaborators.length > 0 ? (
+        <div className="collaborators-grid">
+          {collaborators.map((collaborator) => (
+            <Collaborator 
+              key={collaborator.id}
+              collaborator={collaborator}
+              backgroundColor={team.primaryColor}
+              onDelete={onDelete}
+              onToggleFavorite={onToggleFavorite}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="empty-state">
+          <div className="empty-icon">👥</div>
+          <p>Nenhum colaborador neste time ainda</p>
+          <small>Adicione colaboradores usando o formulário acima</small>
+        </div>
+      )}
+    </section>
+  );
+};
 
 export default Team;

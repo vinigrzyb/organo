@@ -1,19 +1,29 @@
-.text-field{
+.text-field {
     margin: 24px 0;
 }
 
-.text-field label{
-     display: block;
-     margin-bottom: 8px;
-     font-size: 24px;
+.text-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #2D3748;
+    font-weight: 600;
 }
 
-.text-field input{
-    background-color: #FFF;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
+.text-field input {
+    background-color: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
     width: 100%;
-    border: none;
-    font-size: 24px;
-    padding: 24px;
+    border: 1px solid #CBD5E0;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 12px 16px;
     box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+
+.text-field input:focus {
+    outline: none;
+    border-color: #6B46C1;
+    box-shadow: 0px 0px 0px 3px rgba(107, 70, 193, 0.2);
 }

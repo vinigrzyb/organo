@@ -1,8 +1,141 @@
-.banner{
-    background-color: #6278F7;
+/* components/Banner/Banner.css - ATUALIZADO */
+.banner {
+    background: linear-gradient(135deg, #6B46C1 0%, #553C9A 50%, #44337A 100%);
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 70vh;
+}
+
+.banner-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 200px;
+    height: 200px;
+    top: -50px;
+    right: -50px;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    bottom: -30px;
+    left: 10%;
+    animation-delay: 2s;
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    left: -20px;
+    animation-delay: 4s;
+}
+
+.banner-content {
+    max-width: 800px;
+    z-index: 2;
+    position: relative;
+}
+
+.logo-wrapper {
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-size: 4.5rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, var(--white), #E9D8FD);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+}
+
+.logo-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.banner-tagline {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 50px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.banner-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.stat {
     text-align: center;
 }
 
-.banner img{
-    max-width: 100%;
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        padding: 80px 20px;
+        min-height: 60vh;
+    }
+    
+    .logo {
+        font-size: 3rem;
+    }
+    
+    .banner-tagline {
+        font-size: 1.2rem;
+    }
+    
+    .banner-stats {
+        gap: 30px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
 }
