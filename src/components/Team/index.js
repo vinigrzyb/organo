@@ -2,7 +2,7 @@
 import './Team.css';
 import Collaborator from '../Collaborator';
 
-const Team = ({ team, collaborators, onDelete, onToggleFavorite }) => {
+const Team = ({ team, collaborators, onDelete, onToggleFavorite, onEdit }) => {
   return (
     <section className="team-section">
       <div className="team-header" style={{ borderLeftColor: team.primaryColor }}>
@@ -25,6 +25,7 @@ const Team = ({ team, collaborators, onDelete, onToggleFavorite }) => {
               backgroundColor={team.primaryColor}
               onDelete={onDelete}
               onToggleFavorite={onToggleFavorite}
+              onEdit={onEdit}
             />
           ))}
         </div>

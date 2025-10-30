@@ -3,6 +3,7 @@ import Banner from './components/Banner';
 import Form from './components/Form';
 import Team from './components/Team';
 import Footer from './components/Footer';
+import EditModal from './components/EditModal';
 import './App.css';
 
 function App() {
@@ -18,8 +19,8 @@ function App() {
 
   const [collaborators, setCollaborators] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editingCollaborator, setEditingCollaborator] = useState(null);
 
-  // 🔹 Função de buscar colaboradores
   const fetchCollaborators = () => {
     fetch("http://localhost:5076/collaborators")
       .then((res) => res.json())
@@ -37,7 +38,6 @@ function App() {
     fetchCollaborators();
   }, []);
 
-  // 🔹 Adicionar colaborador via API
   const handleAddCollaborator = (collaborator) => {
     fetch("http://localhost:5076/collaborators", {
       method: "POST",
@@ -52,7 +52,20 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-  // 🔹 Deletar colaborador
+  const handleUpdateCollaborator = (updatedCollaborator) => {
+    fetch(`http://localhost:5076/collaborators/${updatedCollaborator.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedCollaborator),
+    })
+      .then(res => {
+        if (!res.ok) throw new Error("Erro ao atualizar colaborador");
+        return res.json();
+      })
+      .then(() => fetchCollaborators())
+      .catch(err => console.error(err));
+  };
+
   const deleteCollaborator = (id) => {
     fetch(`http://localhost:5076/collaborators/${id}`, {
       method: "DELETE",
@@ -64,7 +77,6 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-  // 🔹 Marcar favorito localmente (opcional)
   const toggleFavorite = (id) => {
     setCollaborators((prev) =>
       prev.map((collaborator) =>
@@ -73,6 +85,14 @@ function App() {
           : collaborator
       )
     );
+  };
+
+  const handleOpenEditModal = (collaborator) => {
+    setEditingCollaborator(collaborator);
+  };
+
+  const handleCloseEditModal = () => {
+    setEditingCollaborator(null);
   };
 
   if (loading) return <p>Carregando...</p>;
@@ -85,7 +105,7 @@ function App() {
         <div className="container">
           <Form
             teams={teams.map((team) => team.name)}
-            onCollaboratorAdded={handleAddCollaborator} // ✅ Agora envia pra API
+            onCollaboratorAdded={handleAddCollaborator}
           />
 
           <section className="organization-section">
@@ -104,12 +124,22 @@ function App() {
                   )}
                   onDelete={deleteCollaborator}
                   onToggleFavorite={toggleFavorite}
+                  onEdit={handleOpenEditModal}
                 />
               ))}
             </div>
           </section>
         </div>
       </main>
+
+      {editingCollaborator && (
+        <EditModal
+          collaborator={editingCollaborator}
+          teams={teams.map((team) => team.name)}
+          onUpdate={handleUpdateCollaborator}
+          onClose={handleCloseEditModal}
+        />
+      )}
 
       <Footer />
     </div>

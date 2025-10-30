@@ -67,7 +67,7 @@ const Form = (props) => {
                     onAltered={value => setRole(value)}
                 />
 
-                <div className="text-field">
+                {/* <div className="text-field">
                     <label>Imagem</label>
                     <input 
                         type="file" 
@@ -75,7 +75,7 @@ const Form = (props) => {
                         onChange={handleFileChange} 
                         ref={fileInputRef} 
                     />
-                </div>
+                </div> */}
                 
                 <DropdownList
                     required={true}

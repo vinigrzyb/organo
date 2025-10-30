@@ -22,7 +22,7 @@
     z-index: 10;
 }
 
-.favorite-btn, .delete-btn {
+.favorite-btn, .delete-btn, .edit-btn {
     background: rgba(255, 255, 255, 0.9);
     border: none;
     border-radius: 50%;
@@ -36,9 +36,13 @@
     backdrop-filter: blur(10px);
 }
 
-.favorite-btn:hover, .delete-btn:hover {
+.favorite-btn:hover, .delete-btn:hover, .edit-btn:hover {
     background: var(--white);
     transform: scale(1.1);
+}
+
+.edit-btn {
+    color: #6B95FF;
 }
 
 .favorite-btn.favorited {

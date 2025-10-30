@@ -1,9 +1,8 @@
 // components/Collaborator/index.js - CORRIGIDO
 import './Collaborator.css';
 
-const Collaborator = ({ collaborator, backgroundColor, onDelete, onToggleFavorite }) => {
+const Collaborator = ({ collaborator, backgroundColor, onDelete, onToggleFavorite, onEdit }) => {
   
-  // Se onDelete ou onToggleFavorite não foram passados, usar funções vazias para evitar erros
   const handleDelete = onDelete ? () => {
     if (window.confirm(`Tem certeza que deseja excluir ${collaborator.name}?`)) {
       onDelete(collaborator.id);
@@ -14,11 +13,23 @@ const Collaborator = ({ collaborator, backgroundColor, onDelete, onToggleFavorit
     onToggleFavorite(collaborator.id);
   } : () => {};
 
+  const handleEdit = onEdit ? () => {
+    onEdit(collaborator);
+  } : () => {};
+
   return (
     <div className="collaborator-card">
-      {/* Mostrar ações apenas se as funções foram passadas */}
-      {(onDelete || onToggleFavorite) && (
+      {(onDelete || onToggleFavorite || onEdit) && (
         <div className="collaborator-actions">
+          {onEdit && (
+            <button 
+              className="edit-btn"
+              onClick={handleEdit}
+              aria-label="Editar colaborador"
+            >
+              ✏️
+            </button>
+          )}
           {onToggleFavorite && (
             <button 
               className={`favorite-btn ${collaborator.favorite ? 'favorited' : ''}`}
